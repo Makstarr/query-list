@@ -1,18 +1,20 @@
-import { TagItem } from "./tag-item";
-import { setTagsQuery } from "../helpers/set-tags-query";
+import { useContext } from "react";
 
-export const TagsList = ({ tagsList, setTagsList }) => {
-  const handleDeleteTag = (index) => {
-    const updatedTags = [...tagsList]
-		updatedTags.splice(index, 1);
-    setTagsQuery({ tagsList: updatedTags });
-    setTagsList(updatedTags);
-  };
+import { TagsListContext } from "../context/tags-list-context";
+
+import { TagItem } from "./tag-item";
+
+export const TagsList = () => {
+  const { tagsList } = useContext(TagsListContext);
+
+  if (!tagsList.length) {
+    return null;
+  }
 
   return (
     <ul>
       {tagsList.map((tag, index) => (
-        <TagItem title={tag} index={index} key={tag + index} handleDeleteTag={handleDeleteTag} />
+        <TagItem title={tag} index={index} key={tag + index} />
       ))}
     </ul>
   );
