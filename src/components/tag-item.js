@@ -1,19 +1,4 @@
-import { useContext } from "react";
-
-import { TagsListContext } from "../context/tags-list-context";
-
-import { setTagsQuery } from "../helpers/set-tags-query";
-
-export const TagItem = ({ title, index }) => {
-  const { tagsList, setTagsList } = useContext(TagsListContext);
-
-  const handleDeleteTag = (index) => {
-    const updatedTags = [...tagsList];
-    updatedTags.splice(index, 1);
-    setTagsQuery({ tagsList: updatedTags });
-    setTagsList(updatedTags);
-  };
-
+export const TagItem = ({ title, index, handleDeleteTag }) => {
   return (
     <li style={{ color: `${title}` }}>
       {title}

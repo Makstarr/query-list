@@ -1,15 +1,18 @@
+import queryString from "query-string";
+
 import "./App.css";
 import { AddTagForm } from "./components/add-tag-form";
 import { TagsList } from "./components/tags-list";
-import { TagsListContextProvider } from "./context/tags-list-context";
+import { useState } from "react";
 
 function App() {
+  const { tags } = queryString.parse(window.location.search);
+  const [tagsList, setTagsList] = useState(tags ? tags.split(",") : []);
+
   return (
     <div className="App">
-      <TagsListContextProvider>
-        <AddTagForm />
-        <TagsList />
-      </TagsListContextProvider>
+      <AddTagForm setTagsList={setTagsList} tagsList={tagsList} />
+      {tagsList.length ? <TagsList tagsList={tagsList} setTagsList={setTagsList} /> : null}
     </div>
   );
 }

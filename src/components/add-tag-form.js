@@ -1,14 +1,9 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useState } from "react";
 import queryString from "query-string";
-
-import { TagsListContext } from "../context/tags-list-context";
-
 import { setTagsQuery } from "../helpers/set-tags-query";
 import { tagInputValidator } from "../helpers/tag-input-validator";
 
-export const AddTagForm = () => {
-  const { tagsList, setTagsList } = useContext(TagsListContext);
-
+export const AddTagForm = ({ setTagsList, tagsList }) => {
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
 
@@ -35,10 +30,10 @@ export const AddTagForm = () => {
   return (
     <>
       <input type="text" onChange={handleInput} value={input} onEnter={handleInput} />
+      {error}
       <button onClick={handleAddTag} disabled={error}>
         Add
       </button>
-      {error}
     </>
   );
 };
