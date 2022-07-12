@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <AddTagForm setTagsList={setTagsList} tagsList={tagsList} />
-      {tagsList.length && <TagsList tagsList={tagsList} setTagsList={setTagsList} />}
+      {tagsList.length ? <TagsList tagsList={tagsList} setTagsList={setTagsList} /> : null}
     </div>
   );
 }
