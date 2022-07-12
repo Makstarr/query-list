@@ -7,12 +7,12 @@ import { useState } from "react";
 
 function App() {
   const { tags } = queryString.parse(window.location.search);
-  const [tagsList, setTagsList] = useState(tags && tags.split(","));
+  const [tagsList, setTagsList] = useState(tags ? tags.split(",") : []);
 
   return (
     <div className="App">
       <AddTagForm setTagsList={setTagsList} tagsList={tagsList} />
-      {tagsList && <TagsList tagsList={tagsList} setTagsList={setTagsList} />}
+      {tagsList.length && <TagsList tagsList={tagsList} setTagsList={setTagsList} />}
     </div>
   );
 }
