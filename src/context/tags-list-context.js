@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import queryString from "query-string";
 
-export const TagsListContext = createContext({ tagsList: [] });
+export const TagsListContext = createContext({ tagsList: []});
 
 export const TagsListContextProvider = ({ children }) => {
   const { tags } = queryString.parse(window.location.search);

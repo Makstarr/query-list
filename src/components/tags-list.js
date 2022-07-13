@@ -15,6 +15,10 @@ export const TagsList = () => {
     setTagsList(updatedTags);
   };
 
+  if (!tagsList.length) {
+    return null;
+  }
+	
   return (
     <Box sx={{ width: "100%", paddingTop: "30px" }}>
       <List sx={{ width: "100%", maxWidth: 360 }} data-testid="tags-list">
