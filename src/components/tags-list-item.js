@@ -7,7 +7,13 @@ import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 export const TagsListItem = ({ title, index, handleDeleteTag }) => {
   const [hover, setHover] = useState(false);
   return (
-    <ListItem key={index} component="div" disablePadding data-testid="tags-list-item">
+    <ListItem
+      sx={{ wordBreak: "break-all" }}
+      key={index}
+      component="div"
+      disablePadding
+      data-testid="tags-list-item"
+    >
       <ListItemButton
         sx={{ borderRadius: "10px" }}
         onClick={() => handleDeleteTag(index)}
