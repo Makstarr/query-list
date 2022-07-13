@@ -1,19 +1,32 @@
-import { TagItem } from "./tag-item";
-import { setTagsQuery } from "../helpers/set-tags-query";
+import { Box, List } from "@mui/material";
 
-export const TagsList = ({ tagsList, setTagsList }) => {
+import { TagsListItem } from "./tags-list-item";
+import { setTagsQuery } from "../helpers/set-tags-query";
+import { useContext } from "react";
+import { TagsListContext } from "../context/tags-list-context";
+
+export const TagsList = () => {
+  const { tagsList, setTagsList } = useContext(TagsListContext);
+
   const handleDeleteTag = (index) => {
-    const updatedTags = [...tagsList]
-		updatedTags.splice(index, 1);
-    setTagsQuery({ tagsList: updatedTags });
+    const updatedTags = [...tagsList];
+    updatedTags.splice(index, 1);
+    setTagsQuery(updatedTags);
     setTagsList(updatedTags);
   };
 
   return (
-    <ul>
-      {tagsList.map((tag, index) => (
-        <TagItem title={tag} index={index} key={tag + index} handleDeleteTag={handleDeleteTag} />
-      ))}
-    </ul>
+    <Box sx={{ width: "100%", paddingTop: "30px" }}>
+      <List sx={{ width: "100%", maxWidth: 360 }} data-testid="tags-list">
+        {tagsList.map((tag, index) => (
+          <TagsListItem
+            title={tag}
+            index={index}
+            key={tag + index}
+            handleDeleteTag={handleDeleteTag}
+          />
+        ))}
+      </List>
+    </Box>
   );
 };

@@ -1,19 +1,18 @@
-import queryString from "query-string";
+import { useContext } from "react";
 
-import "./App.css";
+import { Box } from "@mui/material";
+
 import { AddTagForm } from "./components/add-tag-form";
 import { TagsList } from "./components/tags-list";
-import { useState } from "react";
+import { TagsListContext } from "./context/tags-list-context";
 
 function App() {
-  const { tags } = queryString.parse(window.location.search);
-  const [tagsList, setTagsList] = useState(tags ? tags.split(",") : []);
-
+  const { tagsList } = useContext(TagsListContext);
   return (
-    <div className="App">
-      <AddTagForm setTagsList={setTagsList} tagsList={tagsList} />
-      {tagsList.length ? <TagsList tagsList={tagsList} setTagsList={setTagsList} /> : null}
-    </div>
+    <Box sx={{ flexGrow: 1, maxWidth: "360px", margin: "auto" }}>
+      <AddTagForm />
+      {tagsList.length ? <TagsList /> : null}
+    </Box>
   );
 }
 
